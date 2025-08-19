@@ -1,0 +1,134 @@
+[
+    {
+        "name": "JavaScript",
+        "type": "language",
+        "description": "JavaScript est utilisé pour rendre les pages web interactives.",
+        "logo": "JavaScript"
+    },
+    {
+        "name": "HTML",
+        "type": "language",
+        "description": "HTML est le langage de base pour créer des pages web.",
+        "logo": "HTML"
+    },
+    {
+        "name": "CSS",
+        "type": "language",
+        "description": "CSS permet de styliser les pages web en définissant leur apparence.",
+        "logo": "CSS"
+    },
+    {
+        "name": "C",
+        "type": "language",
+        "description": "C est un langage de bas niveau, souvent utilisé pour des applications systèmes.",
+        "logo": "C"
+    },
+    {
+        "name": "Shell",
+        "type": "language",
+        "description": "Shell scripting est utilisé pour automatiser des tâches système dans un terminal.",
+        "logo": "Shell"
+    },
+    {
+        "name": "Python",
+        "type": "language",
+        "description": "Python est un langage polyvalent, populaire dans les domaines de l'IA et du web.",
+        "logo": "Python"
+    },
+    {
+        "name": "TypeScript",
+        "type": "language",
+        "description": "TypeScript est un sur-ensemble de JavaScript qui permet de définir des types statiques.",
+        "logo": "TypeScript"
+    },
+    {
+        "name": "Svelte",
+        "type": "framework",
+        "description": "Svelte est un framework JavaScript moderne pour créer des apps performantes.",
+        "logo": "Svelte"
+    },
+    {
+        "name": "Nodejs",
+        "type": "framework",
+        "description": "Node.js permet de créer des applications côté serveur avec JavaScript.",
+        "logo": "Nodejs"
+    },
+    {
+        "name": "React",
+        "type": "framework",
+        "description": "React est une bibliothèque JavaScript pour construire des interfaces utilisateur.",
+        "logo": "React"
+    },
+    {
+        "name": "Bulma",
+        "type": "framework",
+        "description": "Bulma est un framework CSS moderne basé sur Flexbox pour concevoir des interfaces responsives.",
+        "logo": "Bulma"
+    },
+    {
+        "name": "Bootstrap",
+        "type": "framework",
+        "description": "Bootstrap est un framework CSS populaire pour créer des sites web responsives et cohérents.",
+        "logo": "Bootstrap"
+    },
+    {
+        "name": "sveltestrap",
+        "type": "framework",
+        "description": "Sveltestrap fournit des composants Bootstrap pour les applications Svelte.",
+        "logo": "sveltestrap"
+    },
+    {
+        "name": "Tailwind",
+        "type": "framework",
+        "description": "Tailwind CSS est un framework utilitaire-first pour créer des designs personnalisés rapidement.",
+        "logo": "Tailwind"
+    },
+    {
+        "name": "SvelteKit",
+        "type": "framework",
+        "description": "SvelteKit est le framework d'application officiel pour Svelte, conçu pour créer des apps fullstack performantes.",
+        "logo": "SvelteKit"
+    },
+    {
+        "name": "CSFML",
+        "type": "framework",
+        "description": "CSFML est une interface C pour la SFML, utilisée pour développer des applications multimédia comme des jeux en 2D.",
+        "logo": "CSFML"
+    },
+    {
+        "name": "FFmpeg (web)",
+        "type": "tool",
+        "description": "FFmpeg en version Web permet de manipuler des fichiers audio/vidéo directement dans le navigateur.",
+        "logo": "FFmpeg"
+    },
+    {
+        "name": "jsonwebtoken",
+        "type": "library",
+        "description": "jsonwebtoken est une bibliothèque permettant de gérer les tokens d'authentification en JSON (JWT).",
+        "logo": "JSONWebToken"
+    },
+    {
+        "name": "JSON",
+        "type": "format",
+        "description": "JSON est un format de données léger utilisé pour l'échange d'informations entre client et serveur.",
+        "logo": "JSON"
+    },
+    {
+        "name": "Git",
+        "type": "tool",
+        "description": "Git est un système de contrôle de version distribué, utilisé pour suivre les modifications dans le code source.",
+        "logo": "Git"
+    },
+    {
+        "name": "Leaflet",
+        "type": "library",
+        "description": "Leaflet est une bibliothèque JavaScript open-source pour afficher des cartes interactives.",
+        "logo": "Leaflet"
+    },
+    {
+        "name": "Vite",
+        "type": "tool",
+        "description": "Vite est un bundler ultra-rapide pour les projets web modernes, particulièrement adapté à Svelte, Vue ou React.",
+        "logo": "Vite"
+    }
+]

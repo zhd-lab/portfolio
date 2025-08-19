@@ -1,0 +1,35 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+.main {
+    width: 100%;
+    padding: 0vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* global font */
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Megrim&family=Permanent+Marker&family=Sixtyfour&display=swap');
+
+
+h5,
+p {
+    font-family: "Sixtyfour", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}

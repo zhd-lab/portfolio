@@ -1,0 +1,490 @@
+<script>
+    import { onMount } from "svelte";
+
+    const layers = [
+        { speed: 0.1, color: "#ffffff40" },
+        { speed: 0.3, color: "#ffffff66" },
+        { speed: 0.5, color: "#ffffff99" },
+        { speed: 0.8, color: "#ffffffff" },
+    ];
+    let scrollY = 0;
+    let spaceShip;
+    let animationFrame;
+    let startTime;
+    let explosion = false;
+    let container;
+
+    onMount(() => {
+        const handleScroll = () => {
+            scrollY = container.scrollTop;
+        };
+        container.addEventListener("scroll", handleScroll);
+
+        animateShip(); // Démarrer l'animation
+
+        setTimeout(() => {
+            explosion = true;
+        }, 26000);
+
+        return () => {
+            container.removeEventListener("scroll", handleScroll);
+            cancelAnimationFrame(animationFrame);
+        };
+    });
+
+    function animateShip() {
+        const duration = 8000;
+        const startTop = -window.innerHeight * 1.2;
+        const endTop = window.innerHeight * 1.8;
+
+        startTime = performance.now();
+
+        function step(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const top = startTop + (endTop - startTop) * progress;
+
+            if (spaceShip) {
+                spaceShip.style.marginTop = `${top}px`;
+                spaceShip.style.opacity = `${0.5 + 0.5 * progress}`;
+            }
+
+            container.scrollTo(0, top);
+
+            if (progress < 1) {
+                animationFrame = requestAnimationFrame(step);
+            } else {
+                // Animation terminée : centrer la Terre
+                const globe = container.querySelector(".globe-container");
+                if (globe) {
+                    globe.style.marginTop = "0"; // Par exemple, ajuster la marge pour centrer
+                    globe.style.transition = "margin-top 1s ease"; // transition douce
+                }
+            }
+        }
+
+        animationFrame = requestAnimationFrame(step);
+    }
+</script>
+
+<div bind:this={container} class="parallax-container">
+    {#each layers as { speed, color }, i}
+        <div
+            class="cloud-layer"
+            style="transform: translateY({scrollY * speed}px); z-index: {i};"
+        >
+            {#each Array(2) as _, j}
+                <div
+                    class="cloud"
+                    style="
+                        top: {Math.random() * 80 + 10}%;
+                        left: {Math.random() * 90}%;
+                        background-color: {color};
+                        animation-delay: {-Math.random() * 20}s;
+                    "
+                />
+            {/each}
+        </div>
+    {/each}
+
+    <div class="block-2">
+        <div class="bird bird-left">🕊</div>
+        <div class="bird bird-right">🕊</div>
+        <div class="plane plane-left">🕊</div>
+        <div class="plane plane-right">🕊</div>
+    </div>
+
+    <div class="block-3">
+        <div class="space-ship" bind:this={spaceShip}>
+            <div class="window"></div>
+            <div id="debris-1"></div>
+            <div id="debris-2"></div>
+            <div id="debris-3"></div>
+        </div>
+    </div>
+
+    <!-- terre -->
+    <div class="globe-container">
+        <div class="earth">
+            {#if explosion}
+                <div style="display: flex; gap: 2vh;">
+                    <div class="city"></div>
+                    <div class="city"></div>
+                    <div class="city"></div>
+                    <div class="city"></div>
+                    <div class="city"></div>
+                </div>
+            {/if}
+        </div>
+    </div>
+</div>
+
+<style>
+    /* citys */
+    .city {
+        width: 4vw;
+        height: 4vh;
+        border-radius: 40vh;
+        background-color: red;
+    }
+
+    .window {
+        margin-left: 1vh;
+        margin-top: 2vh;
+        width: 1vw;
+        height: 1vw;
+        border-radius: 50%;
+        background-color: rgba(51, 45, 45, 0.479);
+        border: solid 0.2vh black;
+    }
+
+    /* Conteneur 3D */
+    .globe-container {
+        width: 60vmin;
+        height: 60vmin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        margin: auto;
+        margin-top: -30vh;
+        position: relative;
+        animation: fadeIn 2s ease-in;
+    }
+
+    .earth {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle at 30% 30%,
+            #3b9bd3,
+            #2e8b57 40%,
+            #1e3a5f
+        );
+        position: relative;
+        box-shadow:
+            inset -20px -20px 40px #00000080,
+            inset 20px 20px 40px #ffffff0d,
+            0 0 40px #00b4ff33;
+        animation:
+            spin 30s linear infinite,
+            shine 6s ease-in-out infinite alternate;
+        transform-style: preserve-3d;
+    }
+
+    .earth::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at 30% 30%,
+            #ffffff33,
+            transparent 60%
+        );
+        mix-blend-mode: screen;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotateY(0deg) rotateX(15deg);
+        }
+        to {
+            transform: rotateY(360deg) rotateX(15deg);
+        }
+    }
+
+    @keyframes shine {
+        0% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0.6;
+            transform: scale(1.05);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* debrits */
+    #debris-1,
+    #debris-2,
+    #debris-3 {
+        width: 8vw;
+        height: 4vh;
+        background-color: black;
+    }
+
+    #debris-1 {
+        animation: jump-anim-1 4s forwards;
+    }
+    @keyframes jump-anim-1 {
+        0% {
+            margin-left: 0;
+        }
+        90% {
+            background-color: red;
+            margin-top: -20vh;
+            margin-left: -20vh;
+            border-radius: 50%;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    #debris-2 {
+        animation: jump-anim-2 3s forwards;
+    }
+    @keyframes jump-anim-2 {
+        0% {
+            margin-left: 0;
+        }
+        90% {
+            margin-top: -20vh;
+            border-radius: 20%;
+        }
+        100% {
+            margin-top: -20vh;
+            background-color: red;
+            opacity: 0;
+        }
+    }
+
+    #debris-3 {
+        animation: jump-anim-3 5s forwards;
+    }
+    @keyframes jump-anim-3 {
+        0% {
+            margin-left: 0;
+        }
+        90% {
+            margin-left: 20vh;
+            margin-top: -40vh;
+            border-radius: 50%;
+        }
+        100% {
+            margin-top: -20vh;
+            background-color: red;
+            opacity: 0;
+        }
+    }
+
+    /* end */
+
+    .parallax-container {
+        overflow-x: hidden;
+        position: relative;
+        width: 100%;
+        height: auto;
+
+        animation: parallaxBg linear 14s forwards;
+    }
+
+    @keyframes parallaxBg {
+        0% {
+            background: linear-gradient(
+                to bottom,
+                #5d6a77cb,
+                #979b9e,
+                #4d667e,
+                #131212
+            );
+        }
+        100% {
+            background-color: black;
+        }
+    }
+
+    /* scrollbar */
+    .parallax-container::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    .parallax-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .parallax-container::-webkit-scrollbar-thumb {
+        background-color: red;
+        border-radius: 2vh;
+        border: 3px solid transparent;
+        background-clip: content-box;
+        width: 0px;
+    }
+
+    .parallax-container::-webkit-scrollbar-thumb:hover {
+        background-color: transparent;
+    }
+
+    .cloud-layer {
+        position: absolute;
+        width: 100%;
+        height: 40vh;
+        pointer-events: none;
+    }
+
+    .cloud {
+        width: 200px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+        background: #5b374d !important;
+        margin-left: -10vh;
+        opacity: 0.8;
+        box-shadow:
+            60px 20px 0 -10px #00353f,
+            120px 30px 0 -20px #1e0f1c;
+        animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateX(-70%);
+        }
+        100% {
+            transform: translateX(130%);
+        }
+    }
+
+    .block-2 {
+        margin-top: 60vh;
+        width: 100%;
+        height: 80vh;
+        position: relative;
+        overflow: hidden;
+        border: solid red 0vh;
+    }
+
+    .bird,
+    .plane {
+        position: absolute;
+        font-size: 2rem;
+        top: calc(20% + var(--offset, 0px));
+        opacity: 0.8;
+    }
+
+    .bird-left {
+        animation: fly-left 12s linear infinite;
+        top: 30%;
+    }
+
+    .bird-right {
+        animation: fly-right 14s linear infinite;
+        top: 40%;
+    }
+
+    .plane-left {
+        animation: fly-left 18s linear infinite;
+        font-size: 2.5rem;
+        top: 50%;
+    }
+
+    .plane-right {
+        animation: fly-right 20s linear infinite;
+        font-size: 2.5rem;
+        top: 60%;
+    }
+
+    @keyframes fly-left {
+        0% {
+            left: -10%;
+            transform: scaleX(-1);
+        }
+        100% {
+            left: 100%;
+            transform: scaleX(-1);
+        }
+    }
+
+    @keyframes fly-right {
+        0% {
+            left: 100%;
+            transform: scaleX(1);
+        }
+        100% {
+            left: -10%;
+            transform: scaleX(1);
+        }
+    }
+
+    .block-3 {
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        width: 100%;
+        height: 50vh;
+    }
+
+    .space-ship {
+        z-index: 9999 !important;
+        position: relative !important;
+        width: 8vw;
+        height: 19vh;
+        border-top: solid 6vh #161515;
+        background-color: grey;
+        animation-delay: 10s;
+        animation: flight 24s ease-in-out forwards;
+    }
+    @keyframes flight {
+        0% {
+            border-top: solid 6vh #a12939;
+        }
+        30% {
+            border-top: solid 6vh #a12939;
+        }
+        40% {
+            border-top: solid 1vh #a12939;
+            margin-top: 30vh;
+        }
+        50% {
+            border-top: solid 0vh #a12939;
+            margin-top: 30vh;
+        }
+        /* part 2 (inside the water) */
+        60% {
+            border-top: solid 0vh #a12939;
+            border-top-left-radius: 20vh;
+            border-top-right-radius: 20vh;
+            border-bottom: solid 4vh #a12939;
+            margin-top: 40vh;
+        }
+        90% {
+            border-top: solid 0vh #a12939;
+            margin-top: 50vh;
+            border-top-left-radius: 20vh;
+            border-top-right-radius: 20vh;
+            width: 6vw;
+            height: 10vh;
+            opacity: 0.9;
+            transform: rotate(-360deg);
+            border-bottom: solid 2vh #a12939;
+            box-shadow: inset 2vh 2vh 2vh #473c3c;
+        }
+        100% {
+            background-color: grey;
+            margin-top: 50vh;
+            border-top-left-radius: 20vh;
+            border-top-right-radius: 20vh;
+            width: 3vw;
+            height: 6vh;
+            opacity: 1;
+            transform: rotate(90deg);
+            border-bottom: solid 0vh #c44e5e;
+        }
+    }
+</style>
