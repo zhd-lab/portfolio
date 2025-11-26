@@ -72,10 +72,10 @@
         "logo": "Bootstrap"
     },
     {
-        "name": "sveltestrap",
+        "name": "Sveltestrap",
         "type": "framework",
         "description": "Sveltestrap fournit des composants Bootstrap pour les applications Svelte.",
-        "logo": "sveltestrap"
+        "logo": "Sveltestrap"
     },
     {
         "name": "Tailwind",
