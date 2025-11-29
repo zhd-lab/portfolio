@@ -1,8 +1,9 @@
 <script>
-    import { Button } from "sveltestrap";
+    import { Button, Card } from "sveltestrap";
     import { onMount } from "svelte";
 
     let animationState = false;
+    let style = "width: 20vw; height: 20vh;";
 
     onMount(() => {
         const timeoutId = setTimeout(() => {
@@ -13,6 +14,7 @@
             clearTimeout(timeoutId);
         };
     });
+
 </script>
 
 {#if !animationState}
@@ -93,7 +95,25 @@
     <div class="box-infinite backdrop">
         <div class="backdrop-layer"></div>
         <div class="content">
-            <Button color="dark">Back</Button>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <Card style={style}>
+                            <Button color="dark">Back</Button>
+                        </Card>
+                    </div>
+                    <div class="col">
+                        <Card style={style}>
+                            <Button color="dark">Back</Button>
+                        </Card>
+                    </div>
+                    <div class="col">
+                        <Card style={style}>
+                            <Button color="dark">Back</Button>
+                        </Card>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {/if}

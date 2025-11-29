@@ -9,7 +9,7 @@
 
             setTimeout(() => {
                 animationState = "end";
-            }, 5000);
+            }, 2000);
         }, 10000);
     }
 
@@ -189,7 +189,7 @@
         background: transparent
             url("https://www.transparenttextures.com/patterns/stardust.png")
             repeat;
-        animation: moveStars 60s linear infinite;
+        animation: moveStars 30s linear infinite;
         opacity: 0.4;
         z-index: 1;
     }
@@ -217,7 +217,7 @@
         background-size: 200% 200%;
         border-radius: 50%;
         animation:
-            rotateGalaxy 60s linear infinite,
+            rotateGalaxy 30s linear infinite,
             pulseGalaxy 10s ease-in-out infinite;
         z-index: 0;
         filter: blur(80px);

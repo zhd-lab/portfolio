@@ -43,7 +43,7 @@
     
     <!-- Lien GitHub -->
     <a href="https://github.com/zhd-lab" target="_blank" style="text-decoration: none;">
-        <Button color={$darkMode ? "dark" : "light"} style="display: flex; align-items: center;">
+        <Button color={$darkMode ? "dark" : "secondary"} style="display: flex; align-items: center;">
             <i class="fab fa-github" style="font-size: 1.5rem; margin-right: 0.5rem;"></i>
             GitHub
         </Button>

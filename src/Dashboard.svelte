@@ -1,9 +1,10 @@
 <script>
-    import { Card, Image, Button } from "sveltestrap";
+    import { Card, Badge, Button } from "sveltestrap";
     import AnimPrimary from "./AnimPrimary.svelte";
     import Navbar from "./Navbar.svelte";
     import { onMount } from "svelte";
-    import { darkMode } from "../stores/stateStore";
+    import { writable } from 'svelte/store';
+    import { darkMode, finalState } from "../stores/stateStore";
 
     let isMobile = false;
     let showCards = [];
@@ -21,7 +22,7 @@
         {
             img: "https://picsum.photos/150/150?random=2",
             title: "100-news",
-            desc: "100 News est une application Web affichant en temps réel les 100 derniers articles de presse publiés sur Internet, pour un accès rapide et centralisé à l'actualité.",
+            desc: "100 News est une application Web affichant en temps réel les 100 derniers articles de presse publiés sur Internet",
         },
     ];
 
@@ -31,11 +32,20 @@
 
         return () => window.removeEventListener("resize", updateIsMobile);
     });
+
+    function defineState() {
+        if ($finalState === "main") {
+            $finalState = writable("mainfinal");
+            console.log("state update : mainfinal");
+            return ("main");
+        }
+        return ("mainfinal");
+    }
 </script>
 
-<main class="main">
+<main class={defineState()}>
     <Card
-        color={$darkMode ? "dark" : "light"}
+        color={$darkMode ? "dark" : "secondary"}
         style="width: 96vw; height: 96vh; margin: 2vh; overflow-y: scroll; background-color: {$darkMode
             ? '#121212'
             : '#ffffff'}; color: {$darkMode ? '#ffffff' : '#000000'};"
@@ -55,7 +65,7 @@
                 {#each projects as project, index}
                     <div class="fade-in">
                         <Card
-                            color={$darkMode ? "dark" : "light"}
+                            color={$darkMode ? "dark" : "secondary"}
                             style="
                     display: flex;
                     flex-direction: {isMobile ? 'column' : 'row'};
@@ -70,31 +80,24 @@
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 "
                         >
-                            <Image
-                                src={project.img}
-                                style="
-                        width: 4rem;
-                        height: 4rem;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        margin-top: {isMobile ? '1rem' : '0'};
-                        order: {isMobile ? 2 : 0};
-                    "
-                            />
                             <div style="flex: 1; order: {isMobile ? 1 : 0};">
-                                <h5>{project.title}</h5>
-                                <p>{project.desc}</p>
+                                <Badge color={$darkMode ? "light" : "dark"}>{project.title}</Badge>
+                                <p style="font-size: 1.5vh; margin-top: 2vh;">{project.desc}</p>
                                 <div align="right">
                                     <a
                                         href="https://zhd-lab.github.io/{project.title}"
                                         target="_blank"
                                         style="text-decoration: none;"
                                     >
+                                <div align="center">
                                         <Button
                                             color={$darkMode
                                                 ? "secondary"
-                                                : "dark"}>découvrir</Button
+                                                : "dark"}
+                                                style="font-size: 1.6vh;"
+                                                >découvrir</Button
                                         >
+                                </div>
                                     </a>
                                 </div>
                             </div>
@@ -118,6 +121,12 @@
         scrollbar-width: thin;
         scrollbar-color: #888 transparent;
         animation: load 0.8s forwards;
+    }
+
+    /* final state */
+    .mainfinal {
+        scrollbar-width: thin;
+        scrollbar-color: #888 transparent;
     }
 
     @keyframes load {

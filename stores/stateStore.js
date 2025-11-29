@@ -4,6 +4,7 @@ import { writable } from 'svelte/store';
 // init const
 // animation flip
 export const isFlipped = writable(false);
+export const finalState = writable("main"); 
 
 export const ongletState = writable("canvas");
 // intro / dashboard

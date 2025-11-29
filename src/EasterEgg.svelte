@@ -10,7 +10,7 @@
     color={$darkMode ? "dark" : "light"}
     style="width: 96vw; height: 96vh; margin: 2vh; background-color: {$darkMode
         ? '#121212'
-        : '#ffffff'}; color: {$darkMode ? '#ffffff' : '#000000'};"
+        : '#6c757d'}; color: {$darkMode ? '#ffffff' : '#000000'};"
 >
     <div class="navbar-wrapper">
         <Navbar />

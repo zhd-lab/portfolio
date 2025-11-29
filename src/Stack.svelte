@@ -73,7 +73,7 @@
 
 <main class="main">
     <Card
-        color={$darkMode ? "dark" : "light"}
+        color={$darkMode ? "dark" : "secondary"}
         style="width: 96vw; height: 96vh; margin: 2vh; overflow-x: hidden; overflow-y: scroll; background-color: {$darkMode
             ? '#121212'
             : '#ffffff'}; color: {$darkMode ? '#ffffff' : '#000000'};"
@@ -102,8 +102,8 @@
                         }}
                     >
                         <img src={tech.logo} alt={tech.name} />
-                        <h4 style="color: grey;">{tech.name}</h4>
-                        <p class="desc">{tech.description}</p>
+                        <h4 style="color: {$darkMode ? '#ffffff' : '#c4bfbf'};">{tech.name}</h4>
+                        <p class="desc" style="color: {$darkMode ? 'grey' : '#000000'};">{tech.description}</p>
                     </div>
                 {/each}
             </div>

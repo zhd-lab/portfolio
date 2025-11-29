@@ -8,7 +8,7 @@
 
 <main class="main">
     <Card
-        color={$darkMode ? "dark" : "light"}
+        color={$darkMode ? "dark" : "secondary"}
         style="width: 96vw; height: 96vh; margin: 2vh; overflow-y: scroll; padding-top: 0vh; background-color: {$darkMode
             ? '#121212'
             : '#ffffff'}; color: {$darkMode ? '#ffffff' : '#000000'};"
@@ -49,5 +49,6 @@
     .main {
         scrollbar-width: thin; /* "auto" ou "thin" */
         scrollbar-color: #888 transparent; /* couleur du pouce et du fond */
+        
     }
 </style>
