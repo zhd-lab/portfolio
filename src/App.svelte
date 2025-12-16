@@ -14,16 +14,10 @@
     console.log("start");
     state.set("intro");
 
-    // Après 2 secondes, changer le state vers "board"
     setTimeout(() => {
       state.set("board");
     }, 5000);
   });
-
-  // Debugging pour voir les changements de state
-  $: {
-    console.log("State changed:", $state);
-  }
 </script>
 
 <main class="main">
@@ -39,4 +33,3 @@
     <EasterEgg />
   {/if}
 </main>
-

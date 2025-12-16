@@ -1,4 +1,5 @@
 <script>
+    import { Button } from "sveltestrap";
     import AstronautAnim from "./AstronautAnim.svelte";
 
     let animationState = false;
@@ -9,7 +10,7 @@
 
             setTimeout(() => {
                 animationState = "end";
-            }, 2000);
+            }, 1000);
         }, 10000);
     }
 
@@ -40,7 +41,9 @@
         </div>
     {:else}
         <div class="line">
-            <div class="circle"></div>
+            <div class="circle">
+                
+            </div>
         </div>
     {/if}
 </div>
@@ -63,7 +66,7 @@
             inset 5vw 5vw 6vw #aaa,
             inset -2vw -2vw 3vw #444;
         filter: drop-shadow(0 0 0.5vw #aaa);
-        animation: moveMoon 40s linear infinite;
+        animation: moveMoon 20s linear infinite;
         z-index: 0;
         overflow: visible;
     }
@@ -146,7 +149,6 @@
         }
     }
 
-    /* Boîte principale */
     .box {
         background-color: #252950 !important;
         height: 100%;
@@ -179,9 +181,19 @@
         justify-content: center;
         align-items: center;
         z-index: 2;
+        position: relative;
     }
 
-    /* Étoiles scintillantes */
+    .rec {
+        font-size: 4vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2vh;
+        font-weight: bold;
+        color: white;
+    }
+
     .stars {
         position: absolute;
         width: 200%;
@@ -203,7 +215,6 @@
         }
     }
 
-    /* Nébuleuse galaxie */
     .galaxy {
         position: absolute;
         width: 200%;
@@ -338,14 +349,15 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        box-shadow: 0 0 2vw rgba(100, 100, 255, 0.15);
-        border: 0.4vw solid rgba(200, 200, 255, 0.05);
+        box-shadow: 0 0 2vw #6464ff26;
+        border: 0.6vw solid #c8c8ff2d;
+        opacity: 0.2;
         animation: pulse 3s ease-in-out infinite alternate;
     }
 
     @keyframes pulse {
         from {
-            opacity: 0.4;
+            opacity: 0.2;
             transform: scale(0.96);
         }
         to {
@@ -499,8 +511,8 @@
         opacity: 0.9;
         box-shadow:
             0 0 2vw 0.5vw #3b3b9a,
-            0 0 3vw 1vw rgba(255, 0, 0, 0.3),
-            0 0 6vw 2vw rgba(0, 0, 255, 0.2);
+            0 0 3vw 1vw #ff00004d,
+            0 0 6vw 2vw #0000ff33;
     }
 
     @keyframes explode {
@@ -517,7 +529,7 @@
             opacity: 1;
             box-shadow:
                 0 0 3vw 1vw #353577,
-                0 0 6vw 2vw #ff000088,
+                0 0 6vw 2vw #e0dcdc88,
                 0 0 10vw 3vw rgba(0, 0, 255, 0.3);
         }
 

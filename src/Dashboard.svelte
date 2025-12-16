@@ -46,7 +46,7 @@
 <main class={defineState()}>
     <Card
         color={$darkMode ? "dark" : "secondary"}
-        style="width: 96vw; height: 96vh; margin: 2vh; overflow-y: scroll; background-color: {$darkMode
+        style="width: 98vw; height: 96vh; margin: 2vh; overflow-y: scroll; background-color: {$darkMode
             ? '#121212'
             : '#ffffff'}; color: {$darkMode ? '#ffffff' : '#000000'};"
     >

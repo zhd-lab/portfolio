@@ -8,7 +8,7 @@
 <main
     class="main"
     color={$darkMode ? "dark" : "light"}
-    style="width: 96vw; height: 96vh; margin: 2vh; background-color: {$darkMode
+    style="width: 98vw; height: 96vh; margin: 2vh; background-color: {$darkMode
         ? '#121212'
         : '#6c757d'}; color: {$darkMode ? '#ffffff' : '#000000'};"
 >
@@ -29,7 +29,7 @@
     }
 
     .scroll-box {
-        width: 96vw;
+        width: 98vw;
         height: 86.5vh;
         display: flex;
         justify-content: center;

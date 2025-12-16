@@ -1,20 +1,20 @@
 <script>
     import { Button, Card } from "sveltestrap";
     import { onMount } from "svelte";
+    import Galery from "./Galery.svelte";
 
     let animationState = false;
-    let style = "width: 20vw; height: 20vh;";
+    let galeryState = false;
 
     onMount(() => {
         const timeoutId = setTimeout(() => {
             animationState = true;
-        }, 20000);
+        }, 10000);
 
         return () => {
             clearTimeout(timeoutId);
         };
     });
-
 </script>
 
 {#if !animationState}
@@ -91,29 +91,50 @@
             />
         </svg>
     </div>
+{:else if galeryState === true}
+    <Galery />
 {:else}
     <div class="box-infinite backdrop">
         <div class="backdrop-layer"></div>
         <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <Card style={style}>
-                            <Button color="dark">Back</Button>
-                        </Card>
-                    </div>
-                    <div class="col">
-                        <Card style={style}>
-                            <Button color="dark">Back</Button>
-                        </Card>
-                    </div>
-                    <div class="col">
-                        <Card style={style}>
-                            <Button color="dark">Back</Button>
-                        </Card>
-                    </div>
+            <Card
+                style="
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    "
+            >
+                <div
+                    style="
+            display: flex;
+            gap: 4vh;
+            align-items: center;
+        "
+                >
+                    <Button
+                        color="light"
+                        style="font-weight: bold;"
+                        on:click={() => {
+                            galeryState = true;
+                        }}>Galerie</Button
+                    >
+                    <Button
+                        color="dark"
+                        style="font-weight: bold;"
+                        on:click={() => {
+                            window.open(
+                                "https://mail.google.com/mail/?view=cm&fs=1&to=marwane.zhid@gmail.com",
+                                "_blank",
+                            );
+                        }}
+                    >
+                        Me contacter
+                    </Button>
                 </div>
-            </div>
+            </Card>
         </div>
     </div>
 {/if}
